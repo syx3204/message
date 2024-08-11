@@ -1,17 +1,58 @@
-<!-- 添加留言板 -->
-<section id="message-board">
-    <h2>给我留言</h2>
-    <form id="message-form">
-        <label for="name">姓名:</label><br>
-        <input type="text" id="name" name="name" required><br>
-        <label for="email">电子邮箱:</label><br>
-        <input type="email" id="email" name="email" required><br>
-        <label for="message">留言:</label><br>
-        <textarea id="message" name="message" required></textarea><br>
-        <button type="submit">提交</button>
-    </form>
-    <p id="success-message" style="display: none;">您的留言已提交，谢谢！</p>
-    <p id="error-message" style="display: none; color: red;"></p>
-    <h3>留言列表</h3>
-    <div id="message-list"></div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guestbook</title>
+    <style>
+        /* 基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #message-board {
+            max-width: 800px;
+            margin: auto;
+        }
+        #message-list div {
+            margin-bottom: 1em;
+        }
+        #success-message, #error-message {
+            padding: 10px;
+            border: 1px solid;
+            display: none;
+        }
+        #success-message {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        #error-message {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <section id="message-board">
+        <h2>给我留言</h2>
+        <form id="message-form">
+            <label for="name">姓名:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">电子邮箱:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="message">留言:</label><br>
+            <textarea id="message" name="message" required></textarea><br>
+            <button type="submit">提交</button>
+        </form>
+        <p id="success-message" style="display: none;">您的留言已提交，谢谢！</p>
+        <p id="error-message" style="display: none; color: red;"></p>
+        <h3>留言列表</h3>
+        <div id="message-list"></div>
+    </section>
+
+    <!-- 引用 JavaScript 文件 -->
+    <script src="script.js"></script>
+</body>
+</html>
