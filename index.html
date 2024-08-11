@@ -11,6 +11,29 @@
         form {
             margin-bottom: 2em;
         }
+        .message-input {
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+        .message-input label,
+        .message-input input,
+        .message-input textarea {
+            display: block;
+            margin-bottom: 1em;
+        }
+        .message-input button {
+            padding: 0.5em 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .message-input button:hover {
+            background-color: #0056b3;
+        }
         .message {
             background-color: #f4f4f4;
             border-radius: 5px;
@@ -27,22 +50,40 @@
         .message .email {
             color: #777;
         }
+
+        
+        .return-button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px; /* 设置圆角 */
+            cursor: pointer; /* 设置鼠标样式为手型 */
+            transition: background-color 0.3s ease; /* 添加平滑过渡效果 */
+        }
+    
+        .return-button:hover {
+            background-color: #e0e0e0; /* 鼠标悬停时改变背景颜色 */
+        }
     </style>
 </head>
 <body>
+    <div class="return-button" onclick="window.location.href='https://syxsyx.us.kg';">返回</div>
     <h1>Guestbook</h1>
-    <form id="guestForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="message-input">
+        <form id="guestForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
     <div id="messages"></div>
 
     <script>
@@ -69,13 +110,15 @@
                     })
                 });
 
-                if (response.ok) {
-                    form.reset();
-                    await loadMessages();
-                    alert('Your message has been submitted successfully!');
-                } else {
-                    alert('There was an error submitting your message.');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(`There was an error submitting your message: ${errorData.message || 'Unknown error'}`);
+                    return;
                 }
+
+                form.reset();
+                await loadMessages();
+                alert('Your message has been submitted successfully!');
             } catch (error) {
                 console.error(error);
                 alert('An unexpected error occurred.');
