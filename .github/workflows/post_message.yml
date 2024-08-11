@@ -1,14 +1,8 @@
 name: Post Message
 
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Name'
-        required: true
-      message:
-        description: 'Message'
-        required: true
+  repository_dispatch:
+    types: [submit-message]
 
 jobs:
   post-message:
@@ -18,7 +12,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Save message
         run: |
-          echo "${{ github.event.inputs.name }}: ${{ github.event.inputs.message }}" >> messages.txt
+          echo "${{ github.event.client_payload.name }}: ${{ github.event.client_payload.message }}" >> messages.txt
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
