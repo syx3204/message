@@ -12,7 +12,7 @@ fs.readFile('./index.html', 'utf8', (err, data) => {
   const githubToken = process.env.GITHUB_TOKEN;
 
   // 替换占位符
-  const result = data.replace(/YOUR_GITHUB_TOKEN/g, githubToken);
+  const result = data.replace(/MY_GITHUB_TOKEN/g, githubToken);
 
   // 写回文件
   fs.writeFile('./index.html', result, 'utf8', (err) => {
